@@ -1,3 +1,4 @@
+
 /***
  * This class represents the store and is the main method for the entire bakery implementation.'
  * 
@@ -17,51 +18,47 @@
  */
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+@SuppressWarnings("unchecked")
 public class Store {
-	
-	static Supply<Bread> supply;
-	static Scanner scanner = new Scanner(System.in);
-	static boolean storeOpen = true;
-	static Storefront gui = new Storefront();
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		supply = new Supply(100);
-		Output o = new Output();
-		o.setDaemon(true); // set the worker to be a low-priority thread. Prioritize recieving shipments over posting supply to storefront
-		o.start();
-		
-		while(scanner.nextLine() != "close") {
-			System.out.print("pee");
-			
-		}
-		
-		
-	}
-	
-	synchronized static void bake() {
-		//while(Store.isOpen()) {
-		
-		try {
-			TimeUnit.SECONDS.sleep(10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		Bread newbread = new Bread();
-		Store.supply.put(newbread);
-		System.out.println("Done");
-		//}
-	}
-	
-	synchronized static void buy() {
-		
-	}
 
+    static Supply<Bread> supply;
+    static Scanner scanner= new Scanner(System.in);
+    static boolean storeOpen= true;
+    static Storefront gui= new Storefront();
 
-	public static boolean isOpen() {
-		// TODO Auto-generated method stub
-		return storeOpen;
-	}
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        supply= new Supply(100);
+        Output o= new Output();
+        o.setDaemon(true); // set the worker to be a low-priority thread. Prioritize recieving
+        // shipments over posting supply to storefront
+        o.start();
+
+    }
+
+    synchronized static void bake() {
+        // while(Store.isOpen()) {
+
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Bread newbread= new Bread();
+        Store.supply.put(newbread);
+        System.out.println(supply.toString());
+        System.out.println("Done");
+        // }
+    }
+
+    synchronized static void buy() {
+
+    }
+
+    public static boolean isOpen() {
+        // TODO Auto-generated method stub
+        return storeOpen;
+    }
 
 }
